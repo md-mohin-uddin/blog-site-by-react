@@ -9,6 +9,7 @@ export default function Write() {
     const [author, setAuthor] = useState('');
     const [posts, setPosts] = useState([]);
     const [postIdCounter, setPostIdCounter] = useState(1);
+    const [editingPostId, setEditingPostId] = useState(null);
 
     const handleChangeTitle = (e) => {
         setTitle(e.target.value);
@@ -45,18 +46,21 @@ export default function Write() {
         setStory('');
         setAuthor('');
     };
-    const handleEdit = (postId) => {
+    const handleEdit = (postId, editedTitle, editedContent) => {
         // Implement edit logic using postId
-        const editedPosts = posts.find((post) => post.postId === postId);
-
         console.log(`Edit post with ID: ${postId}`);
+
+        // Find the post in the posts array and update its data
+        const updatedPosts = posts.map((post) => (post.postId === postId ? { ...post, title: editedTitle, content: editedContent } : post));
+
+        setPosts(updatedPosts);
+        setEditingPostId(null); // Exit edit mode
     };
 
     const handleDelete = (postId) => {
         // Implement delete logic using postId
         const updatedPosts = posts.filter((post) => post.postId !== postId);
         setPosts(updatedPosts);
-        console.log(`Delete post with ID: ${postId}`);
     };
     return (
         <div className="write">
@@ -80,7 +84,7 @@ export default function Write() {
                 </button>
             </form>
             {posts.map((post) => (
-                <SinglePost key={post.postId} post={post} onEdit={handleEdit} onDelete={handleDelete} />
+                <SinglePost key={post.postId} post={post} onEdit={(postId, editedTitle, editedContent) => handleEdit(postId, editedTitle, editedContent)} onDelete={handleDelete} />
             ))}
         </div>
     );
