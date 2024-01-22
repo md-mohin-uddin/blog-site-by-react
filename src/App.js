@@ -7,6 +7,7 @@ import Register from './pages/register/Register';
 import Login from './pages/login/Login';
 import Write from './pages/write/Write';
 import Single from './pages/single/Single';
+import Sidebar from './components/sidebar/SideBar';
 
 const App = () => {
     const currentUser = true;
@@ -17,6 +18,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/posts" element={<Home />} />
+                    <Route path="/about" element={<Sidebar />} />
                     <Route path="/register" element={currentUser ? <Home /> : <Register />} />
                     <Route path="/login" element={currentUser ? <Home /> : <Login />} />
                     <Route path="/post/:id" element={<Single />} />

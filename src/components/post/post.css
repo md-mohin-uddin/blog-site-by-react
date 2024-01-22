@@ -1,12 +1,13 @@
 .post {
-    width: 485px;
+    width: 385px;
     margin: 0px 25px 40px 25px;
     display: flex;
     flex-direction: column;
+    padding: 5px;
 }
 
 .postImg {
-    width: 485px;
+    width: 385px;
     height: 280px;
     object-fit: cover;
     border-radius: 7px;
@@ -49,6 +50,7 @@
 .postDesc {
     font-family: 'Varela Round', Arial, Helvetica, sans-serif;
     font-weight: 400;
+    text-align: justify;
     font-size: 14px;
     line-height: 24px;
     color: #444444;

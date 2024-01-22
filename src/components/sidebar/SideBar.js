@@ -23,10 +23,18 @@ export default function Sidebar() {
             <div className="sidebarItem">
                 <span className="sidebarTitle">FOLLOW US</span>
                 <div className="sidebarSocial">
-                    <i className="topIcon fab fa-facebook-square"></i>
-                    <i className=" topIcon fab fa-linkedin"></i>
-                    <i className="topIcon fab fa-github-square"></i>
-                    <i className="topIcon fab fa-instagram-square"></i>
+                    <a href="https://www.facebook.com/umdmohin">
+                        <i className="topIcon fab fa-facebook-square"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mdmohinuddin">
+                        <i className=" topIcon fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://www.github.com/md-mohin-uddin">
+                        <i className="topIcon fab fa-github-square"></i>
+                    </a>
+                    <a href="https://www.instagram.com/md__mohin__uddin">
+                        <i className="topIcon fab fa-instagram-square"></i>
+                    </a>
                 </div>
             </div>
         </div>
