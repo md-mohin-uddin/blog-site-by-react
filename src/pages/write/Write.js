@@ -8,7 +8,7 @@ export default function Write() {
     const [story, setStory] = useState('');
     const [author, setAuthor] = useState('');
     const [posts, setPosts] = useState([]);
-    const [publishedPost, setPublishedPost] = useState(null);
+    const [postIdCounter, setPostIdCounter] = useState(1);
 
     const handleChangeTitle = (e) => {
         setTitle(e.target.value);
@@ -26,6 +26,7 @@ export default function Write() {
 
         // Create a new post object
         const newPost = {
+            postId: postIdCounter,
             title,
             content: story,
             imageUrl: 'https://www.gethow.org/wp-content/uploads/2020/09/blog.jpg',
@@ -34,7 +35,9 @@ export default function Write() {
         };
 
         // Set the new post as the publishedPost state
-        setPublishedPost(newPost);
+        // setPublishedPost(newPost);
+        // Increment postIdCounter for the next post
+        setPostIdCounter(postIdCounter + 1);
 
         setPosts((prevPosts) => [...prevPosts, newPost]);
         // Clear the form fields
@@ -42,7 +45,19 @@ export default function Write() {
         setStory('');
         setAuthor('');
     };
+    const handleEdit = (postId) => {
+        // Implement edit logic using postId
+        const editedPosts = posts.find((post) => post.postId === postId);
 
+        console.log(`Edit post with ID: ${postId}`);
+    };
+
+    const handleDelete = (postId) => {
+        // Implement delete logic using postId
+        const updatedPosts = posts.filter((post) => post.postId !== postId);
+        setPosts(updatedPosts);
+        console.log(`Delete post with ID: ${postId}`);
+    };
     return (
         <div className="write">
             <img className="writeImg" src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
@@ -64,8 +79,8 @@ export default function Write() {
                     Publish
                 </button>
             </form>
-            {posts.map((post, index) => (
-                <SinglePost key={index} post={post} />
+            {posts.map((post) => (
+                <SinglePost key={post.postId} post={post} onEdit={handleEdit} onDelete={handleDelete} />
             ))}
         </div>
     );
