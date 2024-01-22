@@ -1,25 +1,29 @@
 import React from 'react';
-import { FaYoutube } from 'react-icons/fa';
+import Home from './pages/home/Home';
+import Settings from './pages/settings/Settings';
+import TopBar from './components/topbar/TopBar';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Register from './pages/register/Register';
+import Login from './pages/login/Login';
+import Write from './pages/write/Write';
+import Single from './pages/single/Single';
 
 const App = () => {
+    const currentUser = true;
     return (
         <div>
-            <header>
-                <h1>A template for React Project</h1>
-            </header>
-            <main>
-                <h1>Welcome to React</h1>
-            </main>
-            <footer>
-                <p className="left">
-                    Subscribe to my{' '}
-                    <a href="https://www.youtube.com/c/anisulislamrubel">
-                        <FaYoutube className="footer__icon" />
-                    </a>{' '}
-                    channel
-                </p>
-                <p className="right">Developed with &hearts; by Anisul Islam</p>
-            </footer>
+            <BrowserRouter>
+                <TopBar />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/posts" element={<Home />} />
+                    <Route path="/register" element={currentUser ? <Home /> : <Register />} />
+                    <Route path="/login" element={currentUser ? <Home /> : <Login />} />
+                    <Route path="/post/:id" element={<Single />} />
+                    <Route path="/write" element={currentUser ? <Write /> : <Login />} />
+                    <Route path="/settings" element={currentUser ? <Settings /> : <Login />} />
+                </Routes>
+            </BrowserRouter>
         </div>
     );
 };
