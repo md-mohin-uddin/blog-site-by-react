@@ -27,37 +27,41 @@ export default function SinglePost({ post, onEdit, onDelete }) {
 
     return (
         <div className="singlePost">
-            <div className="singlePostWrapper">
-                <img className="singlePostImg" src={imageUrl} alt="" />
-                <h1 className="singlePostTitle">
-                    {isEditing ? <input type="text" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} className="editInput" /> : title}
-                    <div className="singlePostEdit">
-                        {isEditing ? (
-                            <>
-                                <i className="singlePostIcon far fa-save" onClick={handleSaveEdit}></i>
-                                <i className="singlePostIcon far fa-times-circle" onClick={handleCancelEdit}></i>
-                            </>
-                        ) : (
-                            <>
-                                <i className="singlePostIcon far fa-edit" onClick={handleEdit}></i>
-                                <i className="singlePostIcon far fa-trash-alt" onClick={() => onDelete(postId)}></i>
-                            </>
-                        )}
+            {post ? (
+                <div className="singlePostWrapper">
+                    <img className="singlePostImg" src={imageUrl} alt="" />
+                    <h1 className="singlePostTitle">
+                        {isEditing ? <input type="text" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} className="editInput" /> : title}
+                        <div className="singlePostEdit">
+                            {isEditing ? (
+                                <>
+                                    <i className="singlePostIcon far fa-save" onClick={handleSaveEdit}></i>
+                                    <i className="singlePostIcon far fa-times-circle" onClick={handleCancelEdit}></i>
+                                </>
+                            ) : (
+                                <>
+                                    <i className="singlePostIcon far fa-edit" onClick={handleEdit}></i>
+                                    <i className="singlePostIcon far fa-trash-alt" onClick={() => onDelete(postId)}></i>
+                                </>
+                            )}
+                        </div>
+                    </h1>
+                    <div className="singlePostInfo">
+                        <span>
+                            Author:
+                            <b className="singlePostAuthor">
+                                <Link className="link" to="/posts?username=mohin">
+                                    {author}
+                                </Link>
+                            </b>
+                        </span>
+                        <span>{timestamp}</span>
                     </div>
-                </h1>
-                <div className="singlePostInfo">
-                    <span>
-                        Author:
-                        <b className="singlePostAuthor">
-                            <Link className="link" to="/posts?username=mohin">
-                                {author}
-                            </Link>
-                        </b>
-                    </span>
-                    <span>{timestamp}</span>
+                    <p className="singlePostDesc">{isEditing ? <textarea value={editedContent} onChange={(e) => setEditedContent(e.target.value)} className="editTextarea" /> : content}</p>
                 </div>
-                <p className="singlePostDesc">{isEditing ? <textarea value={editedContent} onChange={(e) => setEditedContent(e.target.value)} className="editTextarea" /> : content}</p>
-            </div>
+            ) : (
+                <p>Loading...</p>
+            )}
         </div>
     );
 }

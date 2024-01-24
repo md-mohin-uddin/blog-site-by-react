@@ -48,7 +48,6 @@ export default function Write() {
     };
     const handleEdit = (postId, editedTitle, editedContent) => {
         // Implement edit logic using postId
-        console.log(`Edit post with ID: ${postId}`);
 
         // Find the post in the posts array and update its data
         const updatedPosts = posts.map((post) => (post.postId === postId ? { ...post, title: editedTitle, content: editedContent } : post));
